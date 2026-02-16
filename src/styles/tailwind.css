@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --spacing: 0.25rem;
+}
+@import 'tw-animate-css';
