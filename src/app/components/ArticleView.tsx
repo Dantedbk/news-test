@@ -97,13 +97,13 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
               <div className={`p-2 rounded-full transition-colors ${article.likes > 0 ? 'bg-red-50 text-red-500' : 'bg-gray-100 text-gray-600 group-hover:bg-red-50 group-hover:text-red-500'}`}>
                 <Heart size={20} className={article.likes > 0 ? "fill-current" : ""} />
               </div>
-              <span className="font-semibold text-gray-700">{article.likes} Likes</span>
+              <span className="font-semibold text-gray-700">{article.likes} Me gusta</span>
             </button>
             <button className="flex items-center gap-2 group">
                <div className="p-2 rounded-full bg-gray-100 text-gray-600 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
                 <MessageSquare size={20} />
               </div>
-              <span className="font-semibold text-gray-700">{article.comments.length} Comments</span>
+              <span className="font-semibold text-gray-700">{article.comments.length} Comentarios</span>
             </button>
           </div>
         </div>

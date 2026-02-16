@@ -16,8 +16,8 @@ export const NewsFeed: React.FC<NewsFeedProps> = ({ articles, onArticleClick }) 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <header className="mb-10">
-        <h1 className="text-4xl font-black text-gray-900 tracking-tight mb-2">The Daily Brief</h1>
-        <p className="text-gray-500 text-lg">Your curated feed of what matters today.</p>
+        <h1 className="text-4xl font-black text-gray-900 tracking-tight mb-2">El Informe Diario</h1>
+        <p className="text-gray-500 text-lg">Tu feed curado de lo que importa hoy.</p>
       </header>
 
       {/* Featured Section */}

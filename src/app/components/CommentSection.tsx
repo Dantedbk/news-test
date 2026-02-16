@@ -30,7 +30,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
 
   return (
     <div className="mt-8 pt-8 border-t border-gray-100">
-      <h3 className="text-xl font-bold text-gray-900 mb-6">Comments ({comments.length})</h3>
+      <h3 className="text-xl font-bold text-gray-900 mb-6">Comentarios ({comments.length})</h3>
       
       {/* Input */}
       <form onSubmit={handleSubmit} className="mb-8 flex gap-4">
@@ -43,7 +43,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
           <textarea
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
-            placeholder="What are your thoughts?"
+            placeholder="¿Cuáles son tus pensamientos?"
             className="w-full bg-gray-50 border border-gray-200 rounded-xl p-4 min-h-[100px] focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none transition-all"
           />
           <div className="absolute bottom-3 right-3">
@@ -108,7 +108,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
                     <span>{comment.likes || 0}</span>
                   </button>
                   <button className="text-xs text-gray-500 hover:text-gray-800 font-medium">
-                    Reply
+                    Responder
                   </button>
                 </div>
               </div>
@@ -118,7 +118,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
         
         {comments.length === 0 && (
           <div className="text-center py-10 text-gray-400">
-            <p>No comments yet. Be the first to share your thoughts!</p>
+            <p>Sin comentarios aún. ¡Sé el primero en compartir tus pensamientos!</p>
           </div>
         )}
       </div>

@@ -4,11 +4,14 @@ import { ArticleView } from './components/ArticleView';
 import { NewsFeed } from './components/NewsFeed';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, Search } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { projectId, publicAnonKey } from '/utils/supabase/info';
 
 const SERVER_URL = `https://${projectId}.supabase.co/functions/v1/make-server-d3395f3e`;
 
 export default function App() {
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [articles, setArticles] = useState<Article[]>([]);
   const [activeArticleId, setActiveArticleId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -21,7 +24,7 @@ export default function App() {
     const fetchArticles = async () => {
       try {
         if (!projectId) {
-           throw new Error("Project ID is missing. Check your supabase connection.");
+           throw new Error("ID del proyecto faltante. Comprueba tu conexión a Supabase.");
         }
 
         console.log(`Fetching news from ${SERVER_URL}/news`);
@@ -35,7 +38,7 @@ export default function App() {
         
         if (!response.ok) {
            const text = await response.text();
-           throw new Error(`Failed to fetch news: ${response.status} ${response.statusText} - ${text}`);
+           throw new Error(`Error al obtener noticias: ${response.status} ${response.statusText} - ${text}`);
         }
         
         const data = await response.json();
@@ -210,19 +213,29 @@ export default function App() {
                 </div>
                 <input 
                   type="text" 
-                  placeholder="Search stories..." 
+                  placeholder="Buscar historias..." 
                   className="block w-full pl-10 pr-3 py-2 border border-transparent rounded-full leading-5 bg-gray-100 text-gray-900 placeholder-gray-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 sm:text-sm transition-all duration-200"
                 />
               </div>
               
-              <button className="flex items-center gap-2 p-1 pr-3 rounded-full hover:bg-gray-50 transition-colors">
-                <img 
-                  src={currentUser.avatar} 
-                  alt={currentUser.name} 
-                  className="h-8 w-8 rounded-full ring-2 ring-white" 
-                />
-                <span className="text-sm font-medium text-gray-700 hidden sm:block">{currentUser.name}</span>
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  aria-label="Toggle theme"
+                  onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+                  className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-input/50 transition-colors"
+                >
+                  {resolvedTheme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                </button>
+
+                <button className="flex items-center gap-2 p-1 pr-3 rounded-full hover:bg-gray-50 transition-colors">
+                  <img 
+                    src={currentUser.avatar} 
+                    alt={currentUser.name} 
+                    className="h-8 w-8 rounded-full ring-2 ring-white" 
+                  />
+                  <span className="text-sm font-medium text-gray-700 hidden sm:block">{currentUser.name}</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -233,8 +246,8 @@ export default function App() {
             <div className="max-w-7xl mx-auto px-4 mt-4">
                  <div className="bg-yellow-50 text-yellow-800 p-4 rounded-lg text-sm border border-yellow-200 shadow-sm flex items-start gap-2">
                     <div className="flex-1">
-                      <strong>Server Connection Error:</strong> {error}
-                      <p className="mt-1 text-xs text-yellow-700">Displaying offline data. Interactive features (like/comment) may not persist.</p>
+                      <strong>Error de conexión del servidor:</strong> {error}
+                      <p className="mt-1 text-xs text-yellow-700">Mostrando datos sin conexión. Las características interactivas (me gusta/comentario) pueden no persistir.</p>
                     </div>
                  </div>
             </div>
@@ -278,13 +291,13 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
               <span className="font-black text-xl tracking-tighter text-gray-900">NEWS.</span>
-              <span className="text-gray-500 text-sm">© 2024 All rights reserved.</span>
+              <span className="text-gray-500 text-sm">© 2024 Todos los derechos reservados.</span>
             </div>
             <div className="flex gap-6 text-gray-500 text-sm">
-              <a href="#" className="hover:text-blue-600 transition-colors">Privacy</a>
-              <a href="#" className="hover:text-blue-600 transition-colors">Terms</a>
-              <a href="#" className="hover:text-blue-600 transition-colors">About</a>
-              <a href="#" className="hover:text-blue-600 transition-colors">Contact</a>
+              <a href="#" className="hover:text-blue-600 transition-colors">Privacidad</a>
+              <a href="#" className="hover:text-blue-600 transition-colors">Términos</a>
+              <a href="#" className="hover:text-blue-600 transition-colors">Acerca de</a>
+              <a href="#" className="hover:text-blue-600 transition-colors">Contacto</a>
             </div>
           </div>
         </footer>
